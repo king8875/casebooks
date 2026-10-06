@@ -91,6 +91,66 @@
     if (q) apply('전체', q);
   }
 
+  /* measured card hover */
+  var hoverCards = document.querySelectorAll('.panel-cases .card, .panel-blog .card, .section .grid-3 > .card, .section .grid-4 > .card');
+  function setCardHeights(card) {
+    var body = card.querySelector('.card-body');
+    if (!body) return;
+
+    var wasOpen = card.classList.contains('card-smooth-open');
+    card.classList.remove('card-smooth-open');
+    var closed = Math.ceil(body.getBoundingClientRect().height);
+    card.style.setProperty('--card-closed-height', closed + 'px');
+
+    var details = body.querySelectorAll('.tag, p, .card-meta');
+    var previous = [];
+    details.forEach(function (el) {
+      previous.push({
+        el: el,
+        style: el.getAttribute('style')
+      });
+      el.style.setProperty('max-height', 'none', 'important');
+      el.style.setProperty('opacity', '1', 'important');
+      el.style.setProperty('transform', 'translateY(0)', 'important');
+      if (el.classList.contains('tag')) el.style.setProperty('margin-bottom', '8px', 'important');
+      else el.style.setProperty('margin-top', '12px', 'important');
+    });
+    card.classList.add('card-smooth-measuring');
+    body.style.height = 'auto';
+    var open = Math.max(closed, Math.ceil(body.scrollHeight));
+    body.style.height = '';
+    card.classList.remove('card-smooth-measuring');
+    previous.forEach(function (item) {
+      if (item.style === null) item.el.removeAttribute('style');
+      else item.el.setAttribute('style', item.style);
+    });
+    card.style.setProperty('--card-open-height', open + 'px');
+    if (wasOpen) card.classList.add('card-smooth-open');
+  }
+
+  hoverCards.forEach(function (card) {
+    var body = card.querySelector('.card-body');
+    if (!body) return;
+    card.classList.add('card-smooth-ready');
+    setCardHeights(card);
+    card.addEventListener('mouseenter', function () {
+      card.classList.add('card-smooth-open');
+    });
+    card.addEventListener('mouseleave', function () {
+      card.classList.remove('card-smooth-open');
+    });
+    card.addEventListener('focusin', function () {
+      card.classList.add('card-smooth-open');
+    });
+    card.addEventListener('focusout', function () {
+      card.classList.remove('card-smooth-open');
+    });
+  });
+
+  window.addEventListener('resize', function () {
+    hoverCards.forEach(setCardHeights);
+  });
+
   /* faq accordion */
   document.querySelectorAll('.faq-q').forEach(function (btn) {
     btn.addEventListener('click', function () {

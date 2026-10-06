@@ -3640,3 +3640,247 @@ body.search-opened { overflow: hidden; }
     padding: 16px !important;
   }
 }
+
+/* Stable measured card hover */
+.card.card-smooth-ready .card-body {
+  height: var(--card-closed-height, 72px) !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  padding: 13px 20px !important;
+  background: rgba(18, 20, 18, 0) !important;
+  transition:
+    height .36s cubic-bezier(.22, 1, .36, 1),
+    background .24s ease,
+    padding .24s ease !important;
+}
+
+.card.card-smooth-ready:hover .card-body,
+.card.card-smooth-ready:focus-within .card-body {
+  height: var(--card-closed-height, 72px) !important;
+  min-height: 0 !important;
+  padding: 13px 20px !important;
+  background: rgba(18, 20, 18, 0) !important;
+}
+
+.card.card-smooth-ready:hover .tag,
+.card.card-smooth-ready:focus-within .tag,
+.card.card-smooth-ready:hover .card-body p,
+.card.card-smooth-ready:focus-within .card-body p,
+.card.card-smooth-ready:hover .card-meta,
+.card.card-smooth-ready:focus-within .card-meta {
+  max-height: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  opacity: 0 !important;
+  transform: translateY(6px) !important;
+}
+
+.card.card-smooth-ready.card-smooth-open .card-body {
+  height: var(--card-open-height, auto) !important;
+  padding: 18px 20px !important;
+  background: rgba(18, 20, 18, .76) !important;
+}
+
+.card.card-smooth-ready.card-smooth-measuring .card-body {
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 18px 20px !important;
+  background: rgba(18, 20, 18, .76) !important;
+  transition: none !important;
+}
+
+.card.card-smooth-ready:not(.card-smooth-open):not(.card-smooth-measuring) .tag,
+.card.card-smooth-ready:not(.card-smooth-open):not(.card-smooth-measuring) .card-body p,
+.card.card-smooth-ready:not(.card-smooth-open):not(.card-smooth-measuring) .card-meta {
+  max-height: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  opacity: 0 !important;
+  transform: translateY(6px) !important;
+}
+
+.card.card-smooth-ready.card-smooth-measuring .tag,
+.card.card-smooth-ready.card-smooth-open .tag {
+  max-height: 32px !important;
+  margin-bottom: 8px !important;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.card.card-smooth-ready.card-smooth-measuring .card-body p,
+.card.card-smooth-ready.card-smooth-open .card-body p,
+.card.card-smooth-ready.card-smooth-measuring .card-meta,
+.card.card-smooth-ready.card-smooth-open .card-meta {
+  max-height: 90px !important;
+  margin-top: 12px !important;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+@media (max-width: 820px) {
+  .card.card-smooth-ready .card-body {
+    padding: 12px 16px !important;
+  }
+
+  .card.card-smooth-ready:hover .card-body,
+  .card.card-smooth-ready:focus-within .card-body {
+    padding: 12px 16px !important;
+  }
+
+  .card.card-smooth-ready.card-smooth-open .card-body,
+  .card.card-smooth-ready.card-smooth-measuring .card-body {
+    padding: 16px !important;
+  }
+}
+
+/* Transform-only card reveal: prevents layout jank on hover out */
+.card.card-smooth-ready .card-body,
+.card.card-smooth-ready:hover .card-body,
+.card.card-smooth-ready:focus-within .card-body,
+.card.card-smooth-ready.card-smooth-open .card-body {
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  will-change: transform, background;
+  transition: transform .36s cubic-bezier(.22, 1, .36, 1), background .24s ease !important;
+}
+
+.card.card-smooth-ready .card-body {
+  padding: 16px 20px !important;
+  background: rgba(18, 20, 18, 0) !important;
+  transform: translate3d(0, calc(100% - 72px), 0);
+}
+
+.card.card-smooth-ready.card-smooth-open .card-body {
+  padding: 16px 20px !important;
+  background: rgba(18, 20, 18, .76) !important;
+  transform: translate3d(0, 0, 0);
+}
+
+.card.card-smooth-ready .card-body h3 {
+  order: 1;
+}
+
+.card.card-smooth-ready .tag,
+.card.card-smooth-ready .card-body p,
+.card.card-smooth-ready .card-meta,
+.card.card-smooth-ready:hover .tag,
+.card.card-smooth-ready:hover .card-body p,
+.card.card-smooth-ready:hover .card-meta,
+.card.card-smooth-ready:focus-within .tag,
+.card.card-smooth-ready:focus-within .card-body p,
+.card.card-smooth-ready:focus-within .card-meta {
+  max-height: none !important;
+  overflow: visible !important;
+  color: rgba(255, 255, 255, .78) !important;
+  opacity: 0 !important;
+  transform: translateY(6px) !important;
+  transition: opacity .22s ease, transform .22s ease !important;
+}
+
+.card.card-smooth-ready .tag {
+  order: 2;
+  margin: 8px 0 0 !important;
+}
+
+.card.card-smooth-ready .card-body p,
+.card.card-smooth-ready .card-meta {
+  order: 3;
+  margin: 10px 0 0 !important;
+}
+
+.card.card-smooth-ready.card-smooth-open .tag,
+.card.card-smooth-ready.card-smooth-open .card-body p,
+.card.card-smooth-ready.card-smooth-open .card-meta {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+@media (max-width: 820px) {
+  .card.card-smooth-ready .card-body,
+  .card.card-smooth-ready.card-smooth-open .card-body {
+    padding: 14px 16px !important;
+  }
+
+  .card.card-smooth-ready .card-body {
+    transform: translate3d(0, calc(100% - 68px), 0);
+  }
+}
+
+/* Final card motion lock: keep hover reveal on transform only */
+.panel-cases .grid-3 > .card.card-smooth-ready .card-body,
+.panel-blog .grid-3 > .card.card-smooth-ready .card-body,
+.section .grid-3 > .card.card-smooth-ready .card-body,
+.section .grid-4 > .card.card-smooth-ready .card-body,
+.panel-cases .grid-3 > .card.card-smooth-ready:hover .card-body,
+.panel-blog .grid-3 > .card.card-smooth-ready:hover .card-body,
+.section .grid-3 > .card.card-smooth-ready:hover .card-body,
+.section .grid-4 > .card.card-smooth-ready:hover .card-body,
+.panel-cases .grid-3 > .card.card-smooth-ready:focus-within .card-body,
+.panel-blog .grid-3 > .card.card-smooth-ready:focus-within .card-body,
+.section .grid-3 > .card.card-smooth-ready:focus-within .card-body,
+.section .grid-4 > .card.card-smooth-ready:focus-within .card-body,
+.panel-cases .grid-3 > .card.card-smooth-ready.card-smooth-open .card-body,
+.panel-blog .grid-3 > .card.card-smooth-ready.card-smooth-open .card-body,
+.section .grid-3 > .card.card-smooth-ready.card-smooth-open .card-body,
+.section .grid-4 > .card.card-smooth-ready.card-smooth-open .card-body {
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 16px 20px !important;
+  overflow: visible !important;
+  transition: transform .36s cubic-bezier(.22, 1, .36, 1), background .24s ease !important;
+  will-change: transform, background;
+}
+
+.panel-cases .grid-3 > .card.card-smooth-ready .card-body,
+.panel-blog .grid-3 > .card.card-smooth-ready .card-body,
+.section .grid-3 > .card.card-smooth-ready .card-body,
+.section .grid-4 > .card.card-smooth-ready .card-body {
+  background: rgba(18, 20, 18, 0) !important;
+  transform: translate3d(0, calc(100% - 72px), 0) !important;
+}
+
+.panel-cases .grid-3 > .card.card-smooth-ready:hover .card-body,
+.panel-blog .grid-3 > .card.card-smooth-ready:hover .card-body,
+.section .grid-3 > .card.card-smooth-ready:hover .card-body,
+.section .grid-4 > .card.card-smooth-ready:hover .card-body,
+.panel-cases .grid-3 > .card.card-smooth-ready:focus-within .card-body,
+.panel-blog .grid-3 > .card.card-smooth-ready:focus-within .card-body,
+.section .grid-3 > .card.card-smooth-ready:focus-within .card-body,
+.section .grid-4 > .card.card-smooth-ready:focus-within .card-body,
+.panel-cases .grid-3 > .card.card-smooth-ready.card-smooth-open .card-body,
+.panel-blog .grid-3 > .card.card-smooth-ready.card-smooth-open .card-body,
+.section .grid-3 > .card.card-smooth-ready.card-smooth-open .card-body,
+.section .grid-4 > .card.card-smooth-ready.card-smooth-open .card-body {
+  background: rgba(18, 20, 18, .76) !important;
+  transform: translate3d(0, 0, 0) !important;
+}
+
+.panel-cases .grid-3 > .card.card-smooth-ready:hover .tag,
+.panel-blog .grid-3 > .card.card-smooth-ready:hover .tag,
+.section .grid-3 > .card.card-smooth-ready:hover .tag,
+.section .grid-4 > .card.card-smooth-ready:hover .tag,
+.panel-cases .grid-3 > .card.card-smooth-ready:hover .card-body p,
+.panel-blog .grid-3 > .card.card-smooth-ready:hover .card-body p,
+.section .grid-3 > .card.card-smooth-ready:hover .card-body p,
+.section .grid-4 > .card.card-smooth-ready:hover .card-body p,
+.panel-cases .grid-3 > .card.card-smooth-ready:hover .card-meta,
+.panel-blog .grid-3 > .card.card-smooth-ready:hover .card-meta,
+.section .grid-3 > .card.card-smooth-ready:hover .card-meta,
+.section .grid-4 > .card.card-smooth-ready:hover .card-meta,
+.panel-cases .grid-3 > .card.card-smooth-ready.card-smooth-open .tag,
+.panel-blog .grid-3 > .card.card-smooth-ready.card-smooth-open .tag,
+.section .grid-3 > .card.card-smooth-ready.card-smooth-open .tag,
+.section .grid-4 > .card.card-smooth-ready.card-smooth-open .tag,
+.panel-cases .grid-3 > .card.card-smooth-ready.card-smooth-open .card-body p,
+.panel-blog .grid-3 > .card.card-smooth-ready.card-smooth-open .card-body p,
+.section .grid-3 > .card.card-smooth-ready.card-smooth-open .card-body p,
+.section .grid-4 > .card.card-smooth-ready.card-smooth-open .card-body p,
+.panel-cases .grid-3 > .card.card-smooth-ready.card-smooth-open .card-meta,
+.panel-blog .grid-3 > .card.card-smooth-ready.card-smooth-open .card-meta,
+.section .grid-3 > .card.card-smooth-ready.card-smooth-open .card-meta,
+.section .grid-4 > .card.card-smooth-ready.card-smooth-open .card-meta {
+  max-height: none !important;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
