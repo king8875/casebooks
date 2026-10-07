@@ -233,7 +233,7 @@
       var rect = aboutFlow.getBoundingClientRect();
       var max = Math.max(1, rect.height - window.innerHeight);
       var progress = Math.min(1, Math.max(0, -rect.top / max));
-      var active = Math.min(flowCards.length - 1, Math.round(progress * (flowCards.length - 1)));
+      var active = Math.min(flowCards.length - 1, Math.floor(progress * flowCards.length));
       flowCards.forEach(function (card, i) {
         card.classList.toggle('active', i === active);
         card.style.setProperty('--offset', i - active);
