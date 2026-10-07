@@ -2,7 +2,7 @@
   'use strict';
 
   var header = document.querySelector('.site-header');
-  var hasDarkHero = !!document.querySelector('.hero');
+  var hasDarkHero = !!document.querySelector('.hero, .about-hero');
 
   function onScroll() {
     var y = window.scrollY > 24;
@@ -177,6 +177,72 @@
   window.addEventListener('resize', function () {
     hoverCards.forEach(setCardHeights);
   });
+
+  /* about page interactive cards and counters */
+  var aboutStats = document.querySelectorAll('.about-stat strong[data-count]');
+  if (aboutStats.length) {
+    var countUp = function (el) {
+      if (el.dataset.counted) return;
+      el.dataset.counted = 'true';
+      var target = parseInt(el.dataset.count, 10) || 0;
+      var start = performance.now();
+      var duration = 900;
+      function tick(now) {
+        var p = Math.min(1, (now - start) / duration);
+        var eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(target * eased);
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    };
+    if ('IntersectionObserver' in window) {
+      var statIo = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            countUp(entry.target);
+            statIo.unobserve(entry.target);
+          }
+        });
+      }, { threshold: .45 });
+      aboutStats.forEach(function (el) { statIo.observe(el); });
+    } else {
+      aboutStats.forEach(countUp);
+    }
+  }
+
+  var aboutCoverStage = document.querySelector('.about-cover-stage');
+  if (aboutCoverStage) {
+    var aboutCovers = Array.prototype.slice.call(aboutCoverStage.querySelectorAll('.about-cover'));
+    var coverRoles = ['is-main', 'is-side', 'is-back'];
+    var coverIndex = 0;
+    if (aboutCovers.length > 1) {
+      window.setInterval(function () {
+        coverIndex = (coverIndex + 1) % aboutCovers.length;
+        aboutCovers.forEach(function (cover, i) {
+          coverRoles.forEach(function (role) { cover.classList.remove(role); });
+          cover.classList.add(coverRoles[(i - coverIndex + aboutCovers.length) % aboutCovers.length]);
+        });
+      }, 3000);
+    }
+  }
+
+  var aboutFlow = document.querySelector('[data-about-flow]');
+  if (aboutFlow) {
+    var flowCards = aboutFlow.querySelectorAll('.flow-card');
+    function updateAboutFlow() {
+      var rect = aboutFlow.getBoundingClientRect();
+      var max = Math.max(1, rect.height - window.innerHeight);
+      var progress = Math.min(1, Math.max(0, -rect.top / max));
+      var active = Math.min(flowCards.length - 1, Math.round(progress * (flowCards.length - 1)));
+      flowCards.forEach(function (card, i) {
+        card.classList.toggle('active', i === active);
+        card.style.setProperty('--offset', i - active);
+      });
+    }
+    updateAboutFlow();
+    window.addEventListener('scroll', updateAboutFlow, { passive: true });
+    window.addEventListener('resize', updateAboutFlow);
+  }
 
   /* faq accordion */
   document.querySelectorAll('.faq-q').forEach(function (btn) {
