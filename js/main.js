@@ -63,6 +63,33 @@
     ctaPanel.classList.add('in-view');
   }
 
+  /* representative case slider */
+  var caseSlider = document.querySelector('[data-case-slider]');
+  var SwiperCtor = window.Swiper || (typeof Swiper !== 'undefined' ? Swiper : null);
+  if (caseSlider && SwiperCtor) {
+    new SwiperCtor(caseSlider, {
+      slidesPerView: 1.15,
+      spaceBetween: 18,
+      speed: 550,
+      watchOverflow: true,
+      navigation: {
+        prevEl: '[data-case-prev]',
+        nextEl: '[data-case-next]',
+        disabledClass: 'is-disabled'
+      },
+      breakpoints: {
+        821: {
+          slidesPerView: 2.5,
+          spaceBetween: 28
+        },
+        1101: {
+          slidesPerView: 3.5,
+          spaceBetween: 28
+        }
+      }
+    });
+  }
+
   /* category filter (blog / portfolio) */
   var filter = document.querySelector('.filter');
   if (filter) {
