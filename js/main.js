@@ -34,7 +34,7 @@
     layer.querySelector('form').addEventListener('submit', function (e) {
       e.preventDefault();
       var q = input.value.trim();
-      if (q) location.href = 'blog.html?q=' + encodeURIComponent(q);
+      if (q) location.href = (document.documentElement.getAttribute('data-root') || '') + 'blog.html?q=' + encodeURIComponent(q);
     });
   }
 
@@ -500,6 +500,47 @@
       });
     });
   });
+
+  /* post pages: share the page link (native share sheet when available, otherwise copy to clipboard) */
+  var shareBtns = document.querySelectorAll('[data-share]');
+  if (shareBtns.length) {
+    var toast = null, toastTimer = null;
+    function showToast(msg) {
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.setAttribute('role', 'status');
+        document.body.appendChild(toast);
+      }
+      toast.textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 2200);
+    }
+    function copyLink(url) {
+      if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(url);
+      }
+      return new Promise(function (resolve, reject) {
+        var ta = document.createElement('textarea');
+        ta.value = url; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy') ? resolve() : reject(); } catch (e) { reject(e); }
+        document.body.removeChild(ta);
+      });
+    }
+    shareBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var url = location.href.split('#')[0];
+        var title = btn.getAttribute('data-share-title') || document.title;
+        if (navigator.share && window.matchMedia('(max-width: 820px)').matches) {
+          navigator.share({ title: title, url: url }).catch(function () {});
+          return;
+        }
+        copyLink(url).then(function () { showToast('링크가 복사되었습니다.'); }, function () { showToast('주소창의 링크를 복사해 주세요.'); });
+      });
+    });
+  }
 
   var y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
