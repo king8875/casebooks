@@ -121,32 +121,109 @@
     });
   });
 
-  /* category filter (blog / portfolio) */
+  /* category filter + pagination (blog / portfolio)
+     flow: filter -> slice by data-per-page -> build the page links. the page lives in the url (?page=2),
+     so a page can be opened directly and the back button works. */
   var filter = document.querySelector('.filter');
   if (filter) {
-    var targets = document.querySelectorAll('[data-cat]');
+    var grid = document.querySelector('[data-per-page]');
+    var perPage = grid ? parseInt(grid.getAttribute('data-per-page'), 10) : 0;
+    var items = Array.prototype.slice.call(document.querySelectorAll('[data-cat]'));
+    var tailCard = document.querySelector('.bl-cta-card');          /* shown on the last page only */
     var emptyMsg = document.querySelector('.empty');
-    function apply(cat, q) {
-      var shown = 0;
-      targets.forEach(function (t) {
-        var okCat = cat === '전체' || t.dataset.cat === cat;
-        var okQ = !q || t.textContent.indexOf(q) > -1;
-        var ok = okCat && okQ;
-        t.classList.toggle('hidden', !ok);
-        if (ok) shown++;
-      });
-      if (emptyMsg) emptyMsg.classList.toggle('hidden', shown > 0);
+    var pager = document.querySelector('[data-pagination]');
+    var ICON_L = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>';
+    var ICON_R = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>';
+    var urlParams = new URLSearchParams(location.search);
+    var state = { cat: '전체', q: urlParams.get('q') || '', page: parseInt(urlParams.get('page'), 10) || 1 };
+
+    function pageUrl(p) {
+      var u = new URLSearchParams();
+      if (state.q) u.set('q', state.q);
+      if (p > 1) u.set('page', p);
+      var s = u.toString();
+      return location.pathname + (s ? '?' + s : '');
     }
-    var params = new URLSearchParams(location.search);
-    var q = params.get('q') || '';
+
+    function matched() {
+      return items.filter(function (t) {
+        var okCat = state.cat === '전체' || t.dataset.cat === state.cat;
+        var okQ = !state.q || t.textContent.indexOf(state.q) > -1;
+        return okCat && okQ;
+      });
+    }
+
+    function buildPager(pages) {
+      if (!pager) return;
+      if (pages <= 1) { pager.hidden = true; pager.innerHTML = ''; return; }
+      var cur = state.page, out = '';
+      out += cur > 1
+        ? '<a class="pg-btn" href="' + pageUrl(cur - 1) + '" data-page="' + (cur - 1) + '" rel="prev" aria-label="이전 페이지">' + ICON_L + '</a>'
+        : '<span class="pg-btn is-disabled" aria-disabled="true">' + ICON_L + '</span>';
+      var nums = [1];
+      for (var i = cur - 1; i <= cur + 1; i++) if (i > 1 && i < pages) nums.push(i);
+      if (pages > 1) nums.push(pages);
+      var prev = 0;
+      nums.forEach(function (n) {
+        if (n - prev > 1) out += '<span class="pg-gap" aria-hidden="true">…</span>';
+        out += n === cur
+          ? '<span class="pg-num is-current" aria-current="page">' + n + '</span>'
+          : '<a class="pg-num" href="' + pageUrl(n) + '" data-page="' + n + '" aria-label="' + n + '페이지">' + n + '</a>';
+        prev = n;
+      });
+      out += cur < pages
+        ? '<a class="pg-btn" href="' + pageUrl(cur + 1) + '" data-page="' + (cur + 1) + '" rel="next" aria-label="다음 페이지">' + ICON_R + '</a>'
+        : '<span class="pg-btn is-disabled" aria-disabled="true">' + ICON_R + '</span>';
+      pager.innerHTML = out;
+      pager.hidden = false;
+    }
+
+    function render() {
+      var list = matched();
+      var pages = perPage ? Math.max(1, Math.ceil(list.length / perPage)) : 1;
+      state.page = Math.min(Math.max(1, state.page), pages);
+      var visible = perPage ? list.slice((state.page - 1) * perPage, state.page * perPage) : list;
+      items.forEach(function (t) { t.classList.toggle('hidden', visible.indexOf(t) === -1); });
+      if (tailCard) tailCard.classList.toggle('hidden', state.page !== pages);
+      if (emptyMsg) emptyMsg.classList.toggle('hidden', list.length > 0);
+      buildPager(pages);
+    }
+
     filter.addEventListener('click', function (e) {
       var b = e.target.closest('button');
       if (!b) return;
       filter.querySelectorAll('button').forEach(function (x) { x.classList.remove('active'); });
       b.classList.add('active');
-      apply(b.dataset.filter, '');
+      state.cat = b.dataset.filter;
+      state.q = '';
+      state.page = 1;
+      history.replaceState(null, '', pageUrl(1));
+      render();
     });
-    if (q) apply('전체', q);
+
+    if (pager) {
+      pager.addEventListener('click', function (e) {
+        var a = e.target.closest('a[data-page]');
+        if (!a) return;
+        e.preventDefault();
+        state.page = parseInt(a.getAttribute('data-page'), 10);
+        history.pushState(null, '', pageUrl(state.page));
+        render();
+        if (grid) {
+          var top = grid.getBoundingClientRect().top + window.scrollY - 150;
+          if (window.scrollY > top) window.scrollTo({ top: top, behavior: 'smooth' });
+        }
+      });
+    }
+
+    window.addEventListener('popstate', function () {
+      var u = new URLSearchParams(location.search);
+      state.q = u.get('q') || '';
+      state.page = parseInt(u.get('page'), 10) || 1;
+      render();
+    });
+
+    render();
   }
 
   /* measured card hover */
