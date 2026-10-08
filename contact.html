@@ -72,17 +72,22 @@
     </div>
   </div>
 </div>
-<main>
-
-<section class="page-hero wrap">
-  <p class="kicker" style="color:var(--accent);font-weight:700;margin-bottom:14px">CONTACT</p>
-  <h1>사례집 문의하기</h1>
-  <p>흩어진 현장의 이야기를, 한 권의 책으로. 편하게 남겨주시면 담당자가 확인 후 연락드릴게요.</p>
-</section>
-<section class="section wrap form-wrap" style="padding-top:10px;margin-left:max(24px,calc((100% - var(--wrap))/2))">
-  <form id="contactForm" novalidate>
+<main class="sub-page contact-page">
+<section class="ct-section">
+  <div class="wrap ct-layout">
+    <aside class="ct-side reveal">
+      <p class="kicker">CONTACT</p>
+      <h1>사례집<br>문의하기</h1>
+      <p class="ct-lead">흩어진 현장의 이야기를, 한 권의 책으로.<br class="only-pc"> 편하게 남겨주시면 담당자가 확인 후 연락드릴게요.</p>
+      <ol class="ct-steps">
+        <li><span>01</span><div><b>문의 남기기</b><p>필수 항목(*)만 작성하셔도 접수됩니다.</p></div></li>
+        <li><span>02</span><div><b>담당자 확인</b><p>남겨주신 내용을 확인한 뒤 연락드립니다.</p></div></li>
+        <li><span>03</span><div><b>견적·일정 협의</b><p>진행 범위와 예산에 맞춰 제작 방향을 함께 정합니다.</p></div></li>
+      </ol>
+    </aside>
+    <form id="contactForm" class="ct-form" novalidate>
     <div class="form-block">
-      <h2>기업정보</h2>
+      <h2><span>01</span>기업정보</h2>
       <div class="field-row">
         <div class="field"><label for="company">회사<span class="req">*</span></label><input type="text" id="company" name="company" placeholder="소속된 회사 또는 기관명을 입력해 주세요." required></div>
         <div class="field"><label for="name">이름<span class="req">*</span></label><input type="text" id="name" name="name" placeholder="담당자명을 입력해 주세요." required></div>
@@ -91,7 +96,7 @@
       </div>
     </div>
     <div class="form-block">
-      <h2>상세 정보</h2>
+      <h2><span>02</span>상세 정보</h2>
       <div class="field-row">
         <div class="field"><label for="website">웹사이트</label><input type="url" id="website" name="website" placeholder="참고할 수 있는 웹사이트를 입력해 주세요."></div>
         <div class="field"><label for="budget">제작 예산</label><input type="text" id="budget" name="budget" placeholder="예산이 정해져 있다면 견적서 작성에 참고할게요."></div>
@@ -108,8 +113,8 @@
     <div class="submit-row"><button type="submit" class="btn btn-dark">문의 남기기</button></div>
     <p class="form-msg" role="status">문의가 접수되었습니다. 담당자가 확인 후 연락드리겠습니다. (현재는 프론트 시안으로 실제 전송되지 않습니다.)</p>
   </form>
+  </div>
 </section>
-
 </main>
 <footer class="site-footer">
   <div class="wrap">

@@ -318,7 +318,7 @@
       if (bad) { bad.focus(); return; }
       form.querySelector('.form-msg').classList.add('show');
       form.reset();
-      window.scrollTo({ top: form.offsetTop, behavior: 'smooth' });
+      window.scrollTo({ top: form.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' });
     });
   }
 
