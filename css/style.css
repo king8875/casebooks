@@ -3872,8 +3872,8 @@ body.search-opened { overflow: hidden; }
 
 .case-dots .case-dot::before {
   content: "";
-  width: 5px;
-  height: 5px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: rgba(255, 255, 255, .56);
   transition: background .25s, transform .25s;
@@ -5250,7 +5250,7 @@ body.search-opened { overflow: hidden; }
 }
 
 .bl-card:hover .bl-thumb img { transform: scale(1.08); }
-.bl-thumb em { position: relative; z-index: 1; padding: 7px 14px; border-radius: 999px; background: rgba(17, 17, 17, .78); color: #fff; font-size: 13px; font-style: normal; font-weight: 700; }
+.bl-thumb em { position: relative; z-index: 1; padding: 7px 14px; border-radius: 999px; background: #fff; color: #111; font-size: 13px; font-style: normal; font-weight: 700; }
 
 .bl-body { display: flex; flex: 1; flex-direction: column; gap: 14px; padding: 26px 26px 28px; }
 .bl-cat { color: #d9542b; font-size: 13px; font-weight: 800; }
