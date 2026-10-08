@@ -8,6 +8,7 @@
 <meta property="og:title" content="포트폴리오 | 디자인위드 사례집">
 <meta property="og:description" content="지자체·공공기관·의료·교육·문화재단·금융 분야 사례집 제작 포트폴리오.">
 <meta property="og:type" content="website">
+<link rel="stylesheet" href="assets/vendor/swiper/swiper-bundle.min.css">
 <link rel="stylesheet" href="css/style.css?v=20261007-footer01">
 </head>
 <body>
@@ -72,52 +73,162 @@
     </div>
   </div>
 </div>
-<main>
-
-<section class="page-hero wrap">
-  <p class="kicker" style="color:var(--accent);font-weight:700;margin-bottom:14px">PORTFOLIO</p>
-  <h1>포트폴리오</h1>
-  <p>다양한 기관과 함께 완성한 사례집을 만나보세요.</p>
-</section>
-<section class="section wrap" style="padding-top:10px">
-  <div class="filter" role="group" aria-label="카테고리 필터"><button type="button" data-filter="전체" class="active">전체</button><button type="button" data-filter="지자체">지자체</button><button type="button" data-filter="공공기관">공공기관</button><button type="button" data-filter="의료·복지">의료·복지</button><button type="button" data-filter="교육">교육</button><button type="button" data-filter="문화·재단">문화·재단</button><button type="button" data-filter="금융·기업">금융·기업</button></div>
-  <div class="grid-4">
-    <a href="#" class="card" data-cat="지자체">
-      <div class="thumb tall tone-1"><span>서울시청 사랑상품권 사례집</span></div>
-      <div class="card-body"><h3>서울시청 사랑상품권 사례집</h3><div class="card-meta"><span>지자체</span><span>2026</span></div></div>
-    </a>
-    <a href="#" class="card" data-cat="공공기관">
-      <div class="thumb tall tone-2"><span>한국도로공사 안전사례집</span></div>
-      <div class="card-body"><h3>한국도로공사 안전사례집</h3><div class="card-meta"><span>공공기관</span><span>2026</span></div></div>
-    </a>
-    <a href="#" class="card" data-cat="교육">
-      <div class="thumb tall tone-3"><span>숭실대학교 교육혁신사례집</span></div>
-      <div class="card-body"><h3>숭실대학교 교육혁신사례집</h3><div class="card-meta"><span>교육</span><span>2025</span></div></div>
-    </a>
-    <a href="#" class="card" data-cat="문화·재단">
-      <div class="thumb tall tone-4"><span>종로문화재단 운영사례집</span></div>
-      <div class="card-body"><h3>종로문화재단 운영사례집</h3><div class="card-meta"><span>문화·재단</span><span>2025</span></div></div>
-    </a>
-    <a href="#" class="card" data-cat="의료·복지">
-      <div class="thumb tall tone-5"><span>강원대병원 의료사례집</span></div>
-      <div class="card-body"><h3>강원대병원 의료사례집</h3><div class="card-meta"><span>의료·복지</span><span>2025</span></div></div>
-    </a>
-    <a href="#" class="card" data-cat="금융·기업">
-      <div class="thumb tall tone-6"><span>국민은행 사회공헌사례집</span></div>
-      <div class="card-body"><h3>국민은행 사회공헌사례집</h3><div class="card-meta"><span>금융·기업</span><span>2024</span></div></div>
-    </a>
-    <a href="#" class="card" data-cat="지자체">
-      <div class="thumb tall tone-7"><span>완도군청 지역활성화사례집</span></div>
-      <div class="card-body"><h3>완도군청 지역활성화사례집</h3><div class="card-meta"><span>지자체</span><span>2024</span></div></div>
-    </a>
-    <a href="#" class="card" data-cat="공공기관">
-      <div class="thumb tall tone-8"><span>국립해양조사원 연구사례집</span></div>
-      <div class="card-body"><h3>국립해양조사원 연구사례집</h3><div class="card-meta"><span>공공기관</span><span>2024</span></div></div>
-    </a>
+<main class="sub-page">
+<section class="sub-hero sub-hero--portfolio">
+  <div class="wrap sub-hero-inner">
+    <div class="sub-hero-copy reveal">
+      <p class="kicker">PORTFOLIO</p>
+      <h1>기관의 이야기를<br>한 권으로 남기다</h1>
+      <p>다양한 기관과 함께 완성한 사례집을 만나보세요.</p>
+      <div class="sub-hero-actions"><a href="#works" class="btn btn-light">사례 둘러보기</a><a href="contact.html" class="btn btn-ghost">문의하기</a></div>
+    </div>
+    <div class="sub-hero-visual about-hero-visual" aria-hidden="true">
+      <div class="about-cover-stage">
+        <figure class="about-cover is-main"><img src="assets/images/s-case_04.png" alt=""></figure>
+        <figure class="about-cover is-back"><img src="assets/images/s-case_01.png" alt=""></figure>
+        <figure class="about-cover is-side"><img src="assets/images/s-case_02.png" alt=""></figure>
+      </div>
+    </div>
   </div>
-  <p class="empty hidden" style="text-align:center;padding:80px 0;color:var(--ink-3)">조건에 맞는 사례가 없습니다.</p>
 </section>
 
+<section class="pf-section" id="works">
+  <div class="wrap">
+    <div class="pf-toolbar reveal">
+      <div class="section-head">
+        <p class="kicker">WORKS</p>
+        <h2>제작 사례</h2>
+      </div>
+      <p class="pf-count">총 <b data-visible-count>8</b>건</p>
+    </div>
+    <div class="reveal pf-filter-wrap"><div class="filter" role="group" aria-label="카테고리 필터"><button type="button" data-filter="전체" class="active">전체</button><button type="button" data-filter="지자체">지자체</button><button type="button" data-filter="공공기관">공공기관</button><button type="button" data-filter="의료·복지">의료·복지</button><button type="button" data-filter="교육">교육</button><button type="button" data-filter="문화·재단">문화·재단</button><button type="button" data-filter="금융·기업">금융·기업</button></div></div>
+    <div class="pf-grid">
+      <article class="case-slide-card pf-item reveal" data-cat="지자체" style="--case-tone:#3b4a3f">
+        <div class="case-imgs swiper" data-case-imgs>
+          <div class="swiper-wrapper">
+            <a class="swiper-slide" href="#" aria-label="서울시청 사랑상품권 사례집 자세히 보기 (1/3)" draggable="false"><img draggable="false" src="assets/images/s-case_04.png" alt="서울시청 사랑상품권 사례집 이미지 1" decoding="async"></a>
+            <a class="swiper-slide" href="#" aria-label="서울시청 사랑상품권 사례집 자세히 보기 (2/3)" draggable="false"><img draggable="false" src="assets/images/s-case_01.png" alt="서울시청 사랑상품권 사례집 이미지 2" decoding="async" loading="lazy"></a>
+            <a class="swiper-slide" href="#" aria-label="서울시청 사랑상품권 사례집 자세히 보기 (3/3)" draggable="false"><img draggable="false" src="assets/images/s-case_03.png" alt="서울시청 사랑상품권 사례집 이미지 3" decoding="async" loading="lazy"></a>
+          </div>
+        </div>
+        <span class="case-price">2026</span>
+        <span class="case-dots"></span>
+        <strong>서울시청 사랑상품권 사례집</strong>
+        <p>시민에게 사업 성과를 쉽게 전달하는 지자체 사례집입니다.</p>
+        <span class="case-tags"><em>지자체</em></span>
+        <span class="case-reserve">자세히 보기</span>
+      </article>
+      <article class="case-slide-card pf-item reveal" data-cat="공공기관" style="--case-tone:#7a3a22">
+        <div class="case-imgs swiper" data-case-imgs>
+          <div class="swiper-wrapper">
+            <a class="swiper-slide" href="#" aria-label="한국도로공사 안전사례집 자세히 보기 (1/3)" draggable="false"><img draggable="false" src="assets/images/s-case_01.png" alt="한국도로공사 안전사례집 이미지 1" decoding="async"></a>
+            <a class="swiper-slide" href="#" aria-label="한국도로공사 안전사례집 자세히 보기 (2/3)" draggable="false"><img draggable="false" src="assets/images/s-case_03.png" alt="한국도로공사 안전사례집 이미지 2" decoding="async" loading="lazy"></a>
+            <a class="swiper-slide" href="#" aria-label="한국도로공사 안전사례집 자세히 보기 (3/3)" draggable="false"><img draggable="false" src="assets/images/s-case_02.png" alt="한국도로공사 안전사례집 이미지 3" decoding="async" loading="lazy"></a>
+          </div>
+        </div>
+        <span class="case-price">2026</span>
+        <span class="case-dots"></span>
+        <strong>한국도로공사 안전사례집</strong>
+        <p>공공 사업의 성과와 과정을 구조적으로 정리한 사례집입니다.</p>
+        <span class="case-tags"><em>공공기관</em></span>
+        <span class="case-reserve">자세히 보기</span>
+      </article>
+      <article class="case-slide-card pf-item reveal" data-cat="교육" style="--case-tone:#25384f">
+        <div class="case-imgs swiper" data-case-imgs>
+          <div class="swiper-wrapper">
+            <a class="swiper-slide" href="#" aria-label="숭실대학교 교육혁신사례집 자세히 보기 (1/3)" draggable="false"><img draggable="false" src="assets/images/s-case_03.png" alt="숭실대학교 교육혁신사례집 이미지 1" decoding="async"></a>
+            <a class="swiper-slide" href="#" aria-label="숭실대학교 교육혁신사례집 자세히 보기 (2/3)" draggable="false"><img draggable="false" src="assets/images/s-case_02.png" alt="숭실대학교 교육혁신사례집 이미지 2" decoding="async" loading="lazy"></a>
+            <a class="swiper-slide" href="#" aria-label="숭실대학교 교육혁신사례집 자세히 보기 (3/3)" draggable="false"><img draggable="false" src="assets/images/s-case_04.png" alt="숭실대학교 교육혁신사례집 이미지 3" decoding="async" loading="lazy"></a>
+          </div>
+        </div>
+        <span class="case-price">2025</span>
+        <span class="case-dots"></span>
+        <strong>숭실대학교 교육혁신사례집</strong>
+        <p>교육 프로그램의 변화와 성과를 담은 사례집입니다.</p>
+        <span class="case-tags"><em>교육</em></span>
+        <span class="case-reserve">자세히 보기</span>
+      </article>
+      <article class="case-slide-card pf-item reveal" data-cat="문화·재단" style="--case-tone:#7a5a3c">
+        <div class="case-imgs swiper" data-case-imgs>
+          <div class="swiper-wrapper">
+            <a class="swiper-slide" href="#" aria-label="종로문화재단 운영사례집 자세히 보기 (1/3)" draggable="false"><img draggable="false" src="assets/images/s-case_02.png" alt="종로문화재단 운영사례집 이미지 1" decoding="async"></a>
+            <a class="swiper-slide" href="#" aria-label="종로문화재단 운영사례집 자세히 보기 (2/3)" draggable="false"><img draggable="false" src="assets/images/s-case_04.png" alt="종로문화재단 운영사례집 이미지 2" decoding="async" loading="lazy"></a>
+            <a class="swiper-slide" href="#" aria-label="종로문화재단 운영사례집 자세히 보기 (3/3)" draggable="false"><img draggable="false" src="assets/images/s-case_01.png" alt="종로문화재단 운영사례집 이미지 3" decoding="async" loading="lazy"></a>
+          </div>
+        </div>
+        <span class="case-price">2025</span>
+        <span class="case-dots"></span>
+        <strong>종로문화재단 운영사례집</strong>
+        <p>문화 사업의 운영 성과를 지면으로 정리한 사례집입니다.</p>
+        <span class="case-tags"><em>문화·재단</em></span>
+        <span class="case-reserve">자세히 보기</span>
+      </article>
+      <article class="case-slide-card pf-item reveal" data-cat="의료·복지" style="--case-tone:#1f4f52">
+        <div class="case-imgs swiper" data-case-imgs>
+          <div class="swiper-wrapper">
+            <a class="swiper-slide" href="#" aria-label="강원대병원 의료사례집 자세히 보기 (1/3)" draggable="false"><img draggable="false" src="assets/images/s-case_04.png" alt="강원대병원 의료사례집 이미지 1" decoding="async"></a>
+            <a class="swiper-slide" href="#" aria-label="강원대병원 의료사례집 자세히 보기 (2/3)" draggable="false"><img draggable="false" src="assets/images/s-case_01.png" alt="강원대병원 의료사례집 이미지 2" decoding="async" loading="lazy"></a>
+            <a class="swiper-slide" href="#" aria-label="강원대병원 의료사례집 자세히 보기 (3/3)" draggable="false"><img draggable="false" src="assets/images/s-case_03.png" alt="강원대병원 의료사례집 이미지 3" decoding="async" loading="lazy"></a>
+          </div>
+        </div>
+        <span class="case-price">2025</span>
+        <span class="case-dots"></span>
+        <strong>강원대병원 의료사례집</strong>
+        <p>현장의 목소리와 성과를 신뢰감 있게 담은 사례집입니다.</p>
+        <span class="case-tags"><em>의료·복지</em></span>
+        <span class="case-reserve">자세히 보기</span>
+      </article>
+      <article class="case-slide-card pf-item reveal" data-cat="금융·기업" style="--case-tone:#6b2f3f">
+        <div class="case-imgs swiper" data-case-imgs>
+          <div class="swiper-wrapper">
+            <a class="swiper-slide" href="#" aria-label="국민은행 사회공헌사례집 자세히 보기 (1/3)" draggable="false"><img draggable="false" src="assets/images/s-case_01.png" alt="국민은행 사회공헌사례집 이미지 1" decoding="async"></a>
+            <a class="swiper-slide" href="#" aria-label="국민은행 사회공헌사례집 자세히 보기 (2/3)" draggable="false"><img draggable="false" src="assets/images/s-case_03.png" alt="국민은행 사회공헌사례집 이미지 2" decoding="async" loading="lazy"></a>
+            <a class="swiper-slide" href="#" aria-label="국민은행 사회공헌사례집 자세히 보기 (3/3)" draggable="false"><img draggable="false" src="assets/images/s-case_02.png" alt="국민은행 사회공헌사례집 이미지 3" decoding="async" loading="lazy"></a>
+          </div>
+        </div>
+        <span class="case-price">2024</span>
+        <span class="case-dots"></span>
+        <strong>국민은행 사회공헌사례집</strong>
+        <p>기업의 활동과 브랜드 톤을 지면에 담은 사례집입니다.</p>
+        <span class="case-tags"><em>금융·기업</em></span>
+        <span class="case-reserve">자세히 보기</span>
+      </article>
+      <article class="case-slide-card pf-item reveal" data-cat="지자체" style="--case-tone:#4a3a5c">
+        <div class="case-imgs swiper" data-case-imgs>
+          <div class="swiper-wrapper">
+            <a class="swiper-slide" href="#" aria-label="완도군청 지역활성화사례집 자세히 보기 (1/3)" draggable="false"><img draggable="false" src="assets/images/s-case_03.png" alt="완도군청 지역활성화사례집 이미지 1" decoding="async"></a>
+            <a class="swiper-slide" href="#" aria-label="완도군청 지역활성화사례집 자세히 보기 (2/3)" draggable="false"><img draggable="false" src="assets/images/s-case_02.png" alt="완도군청 지역활성화사례집 이미지 2" decoding="async" loading="lazy"></a>
+            <a class="swiper-slide" href="#" aria-label="완도군청 지역활성화사례집 자세히 보기 (3/3)" draggable="false"><img draggable="false" src="assets/images/s-case_04.png" alt="완도군청 지역활성화사례집 이미지 3" decoding="async" loading="lazy"></a>
+          </div>
+        </div>
+        <span class="case-price">2024</span>
+        <span class="case-dots"></span>
+        <strong>완도군청 지역활성화사례집</strong>
+        <p>시민에게 사업 성과를 쉽게 전달하는 지자체 사례집입니다.</p>
+        <span class="case-tags"><em>지자체</em></span>
+        <span class="case-reserve">자세히 보기</span>
+      </article>
+      <article class="case-slide-card pf-item reveal" data-cat="공공기관" style="--case-tone:#2b2b2b">
+        <div class="case-imgs swiper" data-case-imgs>
+          <div class="swiper-wrapper">
+            <a class="swiper-slide" href="#" aria-label="국립해양조사원 연구사례집 자세히 보기 (1/3)" draggable="false"><img draggable="false" src="assets/images/s-case_02.png" alt="국립해양조사원 연구사례집 이미지 1" decoding="async"></a>
+            <a class="swiper-slide" href="#" aria-label="국립해양조사원 연구사례집 자세히 보기 (2/3)" draggable="false"><img draggable="false" src="assets/images/s-case_04.png" alt="국립해양조사원 연구사례집 이미지 2" decoding="async" loading="lazy"></a>
+            <a class="swiper-slide" href="#" aria-label="국립해양조사원 연구사례집 자세히 보기 (3/3)" draggable="false"><img draggable="false" src="assets/images/s-case_01.png" alt="국립해양조사원 연구사례집 이미지 3" decoding="async" loading="lazy"></a>
+          </div>
+        </div>
+        <span class="case-price">2024</span>
+        <span class="case-dots"></span>
+        <strong>국립해양조사원 연구사례집</strong>
+        <p>공공 사업의 성과와 과정을 구조적으로 정리한 사례집입니다.</p>
+        <span class="case-tags"><em>공공기관</em></span>
+        <span class="case-reserve">자세히 보기</span>
+      </article>
+    </div>
+    <p class="empty hidden pf-empty">조건에 맞는 사례가 없습니다.</p>
+  </div>
+</section>
+
+<section class="cta panel-cta"><div class="wrap reveal"><h2>사례집 제작, 지금 상담해보세요</h2><p>어떤 과정이든 필요에 맞게 유연하게 함께합니다.</p><a href="contact.html" class="btn btn-light">문의하기</a></div></section>
 </main>
 <footer class="site-footer">
   <div class="wrap">
@@ -144,6 +255,7 @@
   <a href="https://www.naver.com/" target="_blank" rel="noopener" class="quick-link quick-naver" aria-label="네이버 바로가기">N</a>
   <button type="button" class="quick-link quick-top" aria-label="맨 위로 이동">↑</button>
 </div>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 <script src="js/main.js?v=20261006-cardfix26"></script>
 </body>
 </html>
