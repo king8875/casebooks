@@ -136,8 +136,6 @@
         if (ok) shown++;
       });
       if (emptyMsg) emptyMsg.classList.toggle('hidden', shown > 0);
-      var countView = document.querySelector('[data-visible-count]');
-      if (countView) countView.textContent = shown;
     }
     var params = new URLSearchParams(location.search);
     var q = params.get('q') || '';

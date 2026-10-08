@@ -5292,8 +5292,6 @@ body.search-opened { overflow: hidden; }
 .pf-section { padding: 96px 0 120px; }
 .pf-toolbar { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; margin-bottom: 8px; }
 .pf-toolbar .section-head { margin-bottom: 0; }
-.pf-count { padding-bottom: 6px; color: #66625b; font-size: 15px; }
-.pf-count b { margin: 0 2px; color: #111; font-size: 30px; font-weight: 700; }
 .pf-filter-wrap { margin-bottom: 52px; padding-top: 24px; }
 
 /* items reuse the home "대표 제작 사례" slide card (.case-slide-card); only the grid is defined here */
