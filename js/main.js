@@ -132,24 +132,30 @@
     var tailCard = document.querySelector('.bl-cta-card, .pf-cta-card');   /* last card of every page */
     var emptyMsg = document.querySelector('.empty');
     var pager = document.querySelector('[data-pagination]');
-    var ICON_L = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>';
-    var ICON_R = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>';
     var urlParams = new URLSearchParams(location.search);
-    var state = { cat: '전체', q: urlParams.get('q') || '', page: parseInt(urlParams.get('page'), 10) || 1 };
+    var state = { cat: '전체', q: urlParams.get('q') || '', page: parseInt(urlParams.get('page'), 10) || 1, sort: urlParams.get('sort') === 'old' ? 'old' : 'new' };
+    var sortBox = document.querySelector('[data-sort]');
 
     function pageUrl(p) {
       var u = new URLSearchParams();
       if (state.q) u.set('q', state.q);
+      if (state.sort === 'old') u.set('sort', 'old');
       if (p > 1) u.set('page', p);
       var s = u.toString();
       return location.pathname + (s ? '?' + s : '');
     }
 
     function matched() {
-      return cards.filter(function (t) {
+      var list = cards.filter(function (t) {
         var okCat = state.cat === '전체' || t.dataset.cat === state.cat;
         var okQ = !state.q || t.textContent.indexOf(state.q) > -1;
         return okCat && okQ;
+      });
+      /* order by published date (data-date); the dom order is the tie-breaker */
+      var dir = state.sort === 'old' ? 1 : -1;
+      return list.slice().sort(function (a, b) {
+        var da = a.getAttribute('data-date') || '', db = b.getAttribute('data-date') || '';
+        return da === db ? cards.indexOf(a) - cards.indexOf(b) : (da < db ? -dir : dir);
       });
     }
 
@@ -158,8 +164,8 @@
       if (pages <= 1) { pager.hidden = true; pager.innerHTML = ''; return; }
       var cur = state.page, out = '';
       out += cur > 1
-        ? '<a class="pg-btn" href="' + pageUrl(cur - 1) + '" data-page="' + (cur - 1) + '" rel="prev" aria-label="이전 페이지">' + ICON_L + '</a>'
-        : '<span class="pg-btn is-disabled" aria-disabled="true">' + ICON_L + '</span>';
+        ? '<a class="pg-btn" href="' + pageUrl(cur - 1) + '" data-page="' + (cur - 1) + '" rel="prev" aria-label="이전 페이지">‹</a>'
+        : '<span class="pg-btn is-disabled" aria-disabled="true">‹</span>';
       var nums = [1];
       for (var i = cur - 1; i <= cur + 1; i++) if (i > 1 && i < pages) nums.push(i);
       if (pages > 1) nums.push(pages);
@@ -172,8 +178,8 @@
         prev = n;
       });
       out += cur < pages
-        ? '<a class="pg-btn" href="' + pageUrl(cur + 1) + '" data-page="' + (cur + 1) + '" rel="next" aria-label="다음 페이지">' + ICON_R + '</a>'
-        : '<span class="pg-btn is-disabled" aria-disabled="true">' + ICON_R + '</span>';
+        ? '<a class="pg-btn" href="' + pageUrl(cur + 1) + '" data-page="' + (cur + 1) + '" rel="next" aria-label="다음 페이지">›</a>'
+        : '<span class="pg-btn is-disabled" aria-disabled="true">›</span>';
       pager.innerHTML = out;
       pager.hidden = false;
     }
@@ -202,6 +208,13 @@
       state.page = Math.min(Math.max(1, state.page), pages);
       var visible = perPage ? list.slice((state.page - 1) * perPage, state.page * perPage) : list;
       cards.forEach(function (t) { t.classList.toggle('hidden', visible.indexOf(t) === -1); });
+      /* show the cards in the chosen order; the large "feature" card only belongs to the newest-first view */
+      visible.forEach(function (t) { grid.insertBefore(t, tailCard || null); });
+      cards.forEach(function (t) { if (t.hasAttribute('data-feature')) t.classList.toggle('is-feature', state.sort === 'new'); });
+      if (sortBox) {
+        sortBox.querySelector('[data-sort-label]').textContent = state.sort === 'old' ? '오래된순' : '최신순';
+        sortBox.querySelectorAll('[data-sort-value]').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-sort-value') === state.sort ? 'true' : 'false'); });
+      }
       fillTail();
       if (emptyMsg) emptyMsg.classList.toggle('hidden', list.length > 0);
       buildPager(pages);
@@ -218,6 +231,23 @@
       history.replaceState(null, '', pageUrl(1));
       render();
     });
+
+    if (sortBox) {
+      var sortBtn = sortBox.querySelector('.sort-btn'), sortMenu = sortBox.querySelector('.sort-menu');
+      var setMenu = function (open) { sortMenu.hidden = !open; sortBtn.setAttribute('aria-expanded', open ? 'true' : 'false'); };
+      sortBtn.addEventListener('click', function () { setMenu(sortMenu.hidden); });
+      sortMenu.addEventListener('click', function (e) {
+        var b = e.target.closest('[data-sort-value]');
+        if (!b) return;
+        state.sort = b.getAttribute('data-sort-value');
+        state.page = 1;
+        history.replaceState(null, '', pageUrl(1));
+        setMenu(false);
+        render();
+      });
+      document.addEventListener('click', function (e) { if (!sortBox.contains(e.target)) setMenu(false); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !sortMenu.hidden) { setMenu(false); sortBtn.focus(); } });
+    }
 
     if (pager) {
       pager.addEventListener('click', function (e) {
@@ -237,6 +267,7 @@
     window.addEventListener('popstate', function () {
       var u = new URLSearchParams(location.search);
       state.q = u.get('q') || '';
+      state.sort = u.get('sort') === 'old' ? 'old' : 'new';
       state.page = parseInt(u.get('page'), 10) || 1;
       render();
     });
