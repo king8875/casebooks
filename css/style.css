@@ -5274,7 +5274,7 @@ body.search-opened { overflow: hidden; }
 .bl-cta-card { justify-content: space-between; gap: 28px; padding: 32px; background: #161713; color: #fff; }
 .bl-cta-card .kicker { margin: 0; color: #fff !important; }
 .bl-cta-card h3 { margin: 0; font-size: 26px; line-height: 1.4; font-weight: 700; }
-.bl-cta-card .btn { align-self: flex-start; }
+.bl-cta-card .btn { align-self: flex-start; font-size: 13px; }
 
 /* the contact card is the last card of every list page; it stretches over the free cells of the last row (class set by js) */
 .bl-cta-card.is-wide { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "k b" "h b"; align-items: center; gap: 12px 32px; min-height: 0; padding: 40px 48px; }
@@ -5285,7 +5285,7 @@ body.search-opened { overflow: hidden; }
 .pf-cta-card { display: flex; flex-direction: column; justify-content: space-between; gap: 28px; min-height: 520px; padding: 32px; border-radius: 48px; background: #161713; color: #fff; }
 .pf-cta-card .kicker { margin: 0; color: #fff !important; }
 .pf-cta-card h3 { margin: 0; font-size: 26px; line-height: 1.4; font-weight: 700; }
-.pf-cta-card .btn { align-self: flex-start; }
+.pf-cta-card .btn { align-self: flex-start; font-size: 13px; }
 .pf-cta-card.is-wide { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "k b" "h b"; align-items: center; gap: 12px 32px; min-height: 0; padding: 48px; }
 .pf-cta-card.is-wide h3 { grid-area: h; }
 .pf-cta-card.is-wide .kicker { grid-area: k; align-self: end; }
