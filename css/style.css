@@ -5280,7 +5280,7 @@ body.search-opened { overflow: hidden; }
 .bl-cta-card.is-wide { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "k b" "h b"; align-items: center; gap: 12px 32px; min-height: 0; padding: 40px 48px; }
 .bl-cta-card.is-wide h3 { grid-area: h; }
 .bl-cta-card.is-wide .kicker { grid-area: k; align-self: end; }
-.bl-cta-card.is-wide .btn { grid-area: b; align-self: center; }
+.bl-cta-card.is-wide .btn { grid-area: b; align-self: flex-end; }
 
 .pf-cta-card { display: flex; flex-direction: column; justify-content: space-between; gap: 28px; min-height: 520px; padding: 32px; border-radius: 48px; background: #161713; color: #fff; }
 .pf-cta-card .kicker { margin: 0; color: #fff !important; }
@@ -5289,7 +5289,7 @@ body.search-opened { overflow: hidden; }
 .pf-cta-card.is-wide { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "k b" "h b"; align-items: center; gap: 12px 32px; min-height: 0; padding: 48px; }
 .pf-cta-card.is-wide h3 { grid-area: h; }
 .pf-cta-card.is-wide .kicker { grid-area: k; align-self: end; }
-.pf-cta-card.is-wide .btn { grid-area: b; align-self: center; }
+.pf-cta-card.is-wide .btn { grid-area: b; align-self: flex-end; }
 
 /* ---------- PORTFOLIO ---------- */
 .pf-section { padding: 96px 0 120px; }
