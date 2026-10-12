@@ -16,10 +16,16 @@
   var toggle = document.querySelector('.menu-toggle');
   var gnb = document.querySelector('.gnb');
   if (toggle) {
-    toggle.addEventListener('click', function () {
-      var open = gnb.classList.toggle('open');
+    var setNavMenu = function (open) {
+      gnb.classList.toggle('open', open);
+      document.body.classList.toggle('menu-open', open);
       toggle.setAttribute('aria-expanded', open);
-    });
+    };
+    toggle.addEventListener('click', function () { setNavMenu(!gnb.classList.contains('open')); });
+    gnb.addEventListener('click', function (e) { if (e.target.closest('a')) setNavMenu(false); });
+    document.addEventListener('click', function (e) { if (gnb.classList.contains('open') && !gnb.contains(e.target) && !toggle.contains(e.target)) setNavMenu(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setNavMenu(false); });
+    window.matchMedia('(min-width: 821px)').addEventListener('change', function (m) { if (m.matches) setNavMenu(false); });
   }
 
   /* search layer (데모: 메뉴/콘텐츠 이동용) */
