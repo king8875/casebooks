@@ -9,12 +9,13 @@
 <meta property="og:description" content="기획·인터뷰·원고·디자인·인쇄까지, 흩어진 현장의 이야기를 한 권의 사례집으로 만드는 디자인위드 사례집 제작 서비스.">
 <meta property="og:type" content="website">
 <link rel="stylesheet" href="assets/vendor/swiper/swiper-bundle.min.css">
-<link rel="stylesheet" href="css/style.css?v=20261007-footer01">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css?v=20261012-a11y01">
 </head>
 <body>
 <header class="site-header">
   <div class="wrap header-inner">
-    <a href="index.html" class="logo" aria-label="디자인위드 사례집 홈">사례집<small>디자인위드</small></a>
+    <a href="index.html" class="logo">사례집<small>디자인위드</small></a>
     <nav class="gnb" aria-label="주요 메뉴"><a href="index.html" class="active">홈</a><a href="about.html">사례집이란?</a><a href="prepare.html">사례집 준비하기</a><a href="blog.html">블로그</a><a href="portfolio.html">포트폴리오</a><a href="faq.html">FAQ</a></nav>
     <div class="header-actions">
       <button class="icon-btn" type="button" data-search-open aria-label="검색">
@@ -34,7 +35,7 @@
       <span class="search-form-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       </span>
-      <input id="siteSearch" type="search" placeholder="포트폴리오, 블로그, 자주 묻는 질문 검색..." aria-label="검색어">
+      <input id="siteSearch" type="search" placeholder="포트폴리오, 블로그, 자주 묻는 질문 검색...">
       <button class="search-close" type="button" aria-label="닫기">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
@@ -47,7 +48,7 @@
     </div>
     <div class="search-results">
       <section class="search-block">
-        <h2>인기 포트폴리오</h2>
+        <p class="search-block-title">인기 포트폴리오</p>
         <div class="search-portfolio">
           <a href="portfolio.html"><span class="search-thumb search-thumb-1"></span><b>서울대학교병원 우수사례집</b></a>
           <a href="portfolio.html"><span class="search-thumb search-thumb-2"></span><b>경기주택도시공사 혁신사례집</b></a>
@@ -55,7 +56,7 @@
         </div>
       </section>
       <section class="search-block">
-        <h2>인기 블로그</h2>
+        <p class="search-block-title">인기 블로그</p>
         <div class="search-blog">
           <a href="blog.html"><span class="search-thumb search-thumb-4"></span><b>사례집 기획, 방대한 자료를 지면에 앉히는 법</b><em>2026.07.13</em></a>
           <a href="blog.html"><span class="search-thumb search-thumb-5"></span><b>대학 사례집, 원고 집필의 시작은 구조입니다</b><em>2026.06.30</em></a>
@@ -63,7 +64,7 @@
         </div>
       </section>
       <section class="search-block">
-        <h2>자주 묻는 질문</h2>
+        <p class="search-block-title">자주 묻는 질문</p>
         <div class="search-faq">
           <a href="faq.html"><span>원고</span><b>사례집 원고는 어떤 형식으로 준비하면 되나요?</b><i>+</i></a>
           <a href="faq.html"><span>디자인</span><b>디자인 시안은 어떤 방식으로 제안되나요?</b><i>+</i></a>
@@ -109,7 +110,7 @@
         <h2>대표 제작 사례</h2>
         <p class="section-desc">공공기관, 의료, 문화재단 등 다양한 기관의 성과를 목적에 맞는 사례집으로 정리했습니다.</p>
       </div>
-      <div class="case-slider-controls" aria-label="대표 제작 사례 슬라이드 이동">
+      <div class="case-slider-controls" role="group" aria-label="대표 제작 사례 슬라이드 이동">
         <button type="button" class="case-slider-btn" data-case-prev aria-label="이전 사례">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
         </button>
@@ -133,7 +134,6 @@
         <strong><span>서울대학교병원 우수사례집</span></strong>
           <p><span>현장 인터뷰와 성과 데이터를 한 권의 우수사례집으로 정리했습니다.</span></p>
           <span class="case-tags"><em>의료·복지</em><em>기획·인터뷰</em></span>
-          <span class="case-reserve">자세히 보기</span>
       </article>
         <article class="case-slide-card swiper-slide">
         <div class="case-imgs swiper" data-case-imgs>
@@ -148,7 +148,6 @@
         <strong><span>경기주택도시공사 혁신사례집</span></strong>
           <p><span>공공기관 혁신 사례를 시각적 흐름이 분명한 책자로 구성했습니다.</span></p>
           <span class="case-tags"><em>공공기관</em><em>디자인·인쇄</em></span>
-          <span class="case-reserve">자세히 보기</span>
       </article>
         <article class="case-slide-card swiper-slide">
         <div class="case-imgs swiper" data-case-imgs>
@@ -163,7 +162,6 @@
         <strong><span>한국예술종합학교 사례집</span></strong>
           <p><span>문화예술 교육성과를 인터뷰 중심의 스토리로 풀어냈습니다.</span></p>
           <span class="case-tags"><em>교육</em><em>스토리 구성</em></span>
-          <span class="case-reserve">자세히 보기</span>
       </article>
         <article class="case-slide-card swiper-slide">
         <div class="case-imgs swiper" data-case-imgs>
@@ -178,7 +176,6 @@
         <strong><span>헬스테이트 멘토링 봉사단</span></strong>
           <p><span>봉사단의 활동 흐름과 참여자의 이야기를 따뜻하게 엮었습니다.</span></p>
           <span class="case-tags"><em>사회공헌</em><em>편집디자인</em></span>
-          <span class="case-reserve">자세히 보기</span>
       </article>
         <article class="case-slide-card swiper-slide">
         <div class="case-imgs swiper" data-case-imgs>
@@ -193,7 +190,6 @@
         <strong><span>관악문화재단 운영사례집</span></strong>
           <p><span>운영 성과와 지역 문화 프로젝트를 감도 있는 지면으로 정리했습니다.</span></p>
           <span class="case-tags"><em>문화·재단</em><em>촬영</em></span>
-          <span class="case-reserve">자세히 보기</span>
       </article>
         <article class="case-slide-card swiper-slide">
         <div class="case-imgs swiper" data-case-imgs>
@@ -208,7 +204,6 @@
         <strong><span>지역상생 프로젝트 백서</span></strong>
           <p><span>분산된 자료를 기준별로 묶어 한눈에 읽히는 백서로 제작했습니다.</span></p>
           <span class="case-tags"><em>지자체</em><em>자료정리</em></span>
-          <span class="case-reserve">자세히 보기</span>
       </article>
         <article class="case-slide-card swiper-slide">
         <div class="case-imgs swiper" data-case-imgs>
@@ -223,7 +218,6 @@
         <strong><span>공공서비스 우수사례집</span></strong>
           <p><span>서비스 개선 과정을 담당자 인터뷰와 도표로 명확하게 구성했습니다.</span></p>
           <span class="case-tags"><em>공공서비스</em><em>원고집필</em></span>
-          <span class="case-reserve">자세히 보기</span>
       </article>
         <article class="case-slide-card swiper-slide">
         <div class="case-imgs swiper" data-case-imgs>
@@ -238,7 +232,6 @@
         <strong><span>디지털 전환 성과집</span></strong>
           <p><span>복잡한 사업성과를 읽기 쉬운 정보 구조와 그래픽으로 정돈했습니다.</span></p>
           <span class="case-tags"><em>IT·정책</em><em>인포그래픽</em></span>
-          <span class="case-reserve">자세히 보기</span>
       </article>
         <article class="case-slide-card swiper-slide">
         <div class="case-imgs swiper" data-case-imgs>
@@ -253,7 +246,6 @@
         <strong><span>현장 중심 인터뷰 사례집</span></strong>
           <p><span>사진과 인터뷰를 중심으로 현장의 분위기를 생생하게 담았습니다.</span></p>
           <span class="case-tags"><em>인터뷰</em><em>사진촬영</em></span>
-          <span class="case-reserve">자세히 보기</span>
       </article>
         <article class="case-slide-card swiper-slide">
         <div class="case-imgs swiper" data-case-imgs>
@@ -268,11 +260,10 @@
         <strong><span>기관 연차보고 사례집</span></strong>
           <p><span>연간 성과와 주요 사례를 안정적인 편집 체계로 묶었습니다.</span></p>
           <span class="case-tags"><em>연차보고</em><em>인쇄제작</em></span>
-          <span class="case-reserve">자세히 보기</span>
       </article>
       </div>
     </div>
-    <div class="section-more reveal"><a href="portfolio.html" class="more-link btn-like">전체 보기</a></div>
+    <div class="section-more reveal"><a href="portfolio.html" class="more-link btn-like">포트폴리오 전체 보기</a></div>
   </div>
 </section>
 
@@ -289,37 +280,37 @@
           <article class="story-item active" data-i="0" aria-hidden="false">
             <p class="story-label">01 · 기획</p>
             <h2>구성과 방향 설계</h2>
-            <p>목차 구성, 사례 선정 기준, 제작 일정을 함께 설계합니다.</p>
+            <p>목차 구성, 사례 선정 기준, 제작 일정을 함께 설계합니다.<br class="only-pc story-br"> 기관의 목적과 독자를 먼저 정리해 사례집의 방향을 분명히 합니다.</p>
           </article>
           <article class="story-item" data-i="1" aria-hidden="true">
             <p class="story-label">02 · 인터뷰</p>
             <h2>현장 취재 및 자료 수집</h2>
-            <p>담당자·수혜자 인터뷰를 통해 현장의 생생한 이야기를 수집합니다.</p>
+            <p>담당자·수혜자 인터뷰를 통해 현장의 생생한 이야기를 수집합니다.<br class="only-pc story-br"> 사업계획서와 보고서 등 보유하신 자료도 함께 정리합니다.</p>
           </article>
           <article class="story-item" data-i="2" aria-hidden="true">
             <p class="story-label">03 · 원고집필</p>
             <h2>사례별 스토리 구성</h2>
-            <p>수집된 자료를 사례별 구조에 맞춰 원고로 완성합니다.</p>
+            <p>수집된 자료를 사례별 구조에 맞춰 원고로 완성합니다.<br class="only-pc story-br"> 배경과 과정, 변화와 성과가 한 흐름으로 읽히도록 구성합니다.</p>
           </article>
           <article class="story-item" data-i="3" aria-hidden="true">
             <p class="story-label">04 · 윤문·교정</p>
             <h2>문장 다듬기, 사실 검증</h2>
-            <p>문장을 다듬고 사실관계를 검증합니다.</p>
+            <p>문장을 다듬고 사실관계를 검증합니다.<br class="only-pc story-br"> 수치와 고유명사, 인터뷰 내용까지 꼼꼼히 확인해 원고의 신뢰도를 높입니다.</p>
           </article>
           <article class="story-item" data-i="4" aria-hidden="true">
             <p class="story-label">05 · 사진촬영</p>
             <h2>현장 및 인물 촬영</h2>
-            <p>현장 및 인물 사진을 촬영합니다.</p>
+            <p>현장 및 인물 사진을 촬영합니다.<br class="only-pc story-br"> 사례의 분위기가 살아나도록 원고와 함께 촬영 컷을 계획하고 진행합니다.</p>
           </article>
           <article class="story-item" data-i="5" aria-hidden="true">
             <p class="story-label">06 · 디자인</p>
             <h2>편집 디자인 시안</h2>
-            <p>편집 디자인 시안을 제안하고 확정합니다.</p>
+            <p>편집 디자인 시안을 제안하고 확정합니다.<br class="only-pc story-br"> 표지 시안을 먼저 제안해 확정한 뒤 내지 디자인을 순차적으로 진행합니다.</p>
           </article>
           <article class="story-item" data-i="6" aria-hidden="true">
             <p class="story-label">07 · 인쇄제작</p>
             <h2>제본·용지·인쇄 제작</h2>
-            <p>제본·용지·코팅까지 인쇄 제작합니다.</p>
+            <p>제본·용지·코팅까지 인쇄 제작합니다.<br class="only-pc story-br"> 배포 목적과 예산에 맞춰 판형과 후가공을 함께 결정하고 납품합니다.</p>
           </article>
         </div>
         <p class="story-note">필요한 과정만 골라서 진행할 수 있습니다.</p>
@@ -423,23 +414,23 @@
       </div>
       <div>
         <button class="family-select" type="button">Family Site</button>
-        <h4>메뉴</h4>
+        <p class="footer-heading">메뉴</p>
         <ul><li><a href="index.html">홈</a></li><li><a href="about.html">사례집이란?</a></li><li><a href="prepare.html">사례집 준비하기</a></li><li><a href="blog.html">블로그</a></li><li><a href="portfolio.html">포트폴리오</a></li><li><a href="faq.html">FAQ</a></li></ul>
       </div>
       <div>
-        <h4>문의</h4>
+        <p class="footer-heading">문의</p>
         <ul><li><a href="contact.html">사례집 문의하기</a></li><li>TEL. 02-6207-0595 | FAX. 02-3446-3964</li><li>M. 010-6654-6207 | E. ahjannong@gmail.com</li></ul>
       </div>
     </div>
-    <p class="copy">&copy; <span id="year">2026</span> 로코즈디자인. All rights reserved.</p>
+    <div class="copy"><ul class="footer-legal"><li><a href="privacy-policy.html">개인정보처리방침</a></li><li><a href="terms.html">이용약관</a></li><li><a href="email-policy.html">이메일무단수집거부</a></li></ul><span>&copy; <span id="year">2026</span> 로코즈디자인. All rights reserved.</span></div>
   </div>
 </footer>
-<div class="quick-menu" aria-label="빠른 메뉴">
+<nav class="quick-menu" aria-label="빠른 메뉴">
   <a href="https://open.kakao.com/" target="_blank" rel="noopener" class="quick-link quick-kakao" aria-label="카카오톡 상담">K</a>
   <a href="https://www.naver.com/" target="_blank" rel="noopener" class="quick-link quick-naver" aria-label="네이버 바로가기">N</a>
   <button type="button" class="quick-link quick-top" aria-label="맨 위로 이동">↑</button>
-</div>
+</nav>
 <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-<script src="js/main.js?v=20261006-cardfix32"></script>
+<script src="js/main.js?v=20261012-a11y01"></script>
 </body>
 </html>

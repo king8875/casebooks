@@ -8,12 +8,13 @@
 <meta property="og:title" content="사례집 준비하기 | 디자인위드 사례집">
 <meta property="og:description" content="지자체·공공기관·의료·교육·문화재단 등 다양한 기관의 사례집 제작 실적과 7단계 제작 프로세스를 안내합니다.">
 <meta property="og:type" content="website">
-<link rel="stylesheet" href="css/style.css?v=20261007-footer01">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css?v=20261012-a11y01">
 </head>
 <body>
 <header class="site-header">
   <div class="wrap header-inner">
-    <a href="index.html" class="logo" aria-label="디자인위드 사례집 홈">사례집<small>디자인위드</small></a>
+    <a href="index.html" class="logo">사례집<small>디자인위드</small></a>
     <nav class="gnb" aria-label="주요 메뉴"><a href="index.html">홈</a><a href="about.html">사례집이란?</a><a href="prepare.html" class="active">사례집 준비하기</a><a href="blog.html">블로그</a><a href="portfolio.html">포트폴리오</a><a href="faq.html">FAQ</a></nav>
     <div class="header-actions">
       <button class="icon-btn" type="button" data-search-open aria-label="검색">
@@ -33,7 +34,7 @@
       <span class="search-form-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       </span>
-      <input id="siteSearch" type="search" placeholder="포트폴리오, 블로그, 자주 묻는 질문 검색..." aria-label="검색어">
+      <input id="siteSearch" type="search" placeholder="포트폴리오, 블로그, 자주 묻는 질문 검색...">
       <button class="search-close" type="button" aria-label="닫기">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
@@ -46,7 +47,7 @@
     </div>
     <div class="search-results">
       <section class="search-block">
-        <h2>인기 포트폴리오</h2>
+        <p class="search-block-title">인기 포트폴리오</p>
         <div class="search-portfolio">
           <a href="portfolio.html"><span class="search-thumb search-thumb-1"></span><b>서울대학교병원 우수사례집</b></a>
           <a href="portfolio.html"><span class="search-thumb search-thumb-2"></span><b>경기주택도시공사 혁신사례집</b></a>
@@ -54,7 +55,7 @@
         </div>
       </section>
       <section class="search-block">
-        <h2>인기 블로그</h2>
+        <p class="search-block-title">인기 블로그</p>
         <div class="search-blog">
           <a href="blog.html"><span class="search-thumb search-thumb-4"></span><b>사례집 기획, 방대한 자료를 지면에 앉히는 법</b><em>2026.07.13</em></a>
           <a href="blog.html"><span class="search-thumb search-thumb-5"></span><b>대학 사례집, 원고 집필의 시작은 구조입니다</b><em>2026.06.30</em></a>
@@ -62,7 +63,7 @@
         </div>
       </section>
       <section class="search-block">
-        <h2>자주 묻는 질문</h2>
+        <p class="search-block-title">자주 묻는 질문</p>
         <div class="search-faq">
           <a href="faq.html"><span>원고</span><b>사례집 원고는 어떤 형식으로 준비하면 되나요?</b><i>+</i></a>
           <a href="faq.html"><span>디자인</span><b>디자인 시안은 어떤 방식으로 제안되나요?</b><i>+</i></a>
@@ -224,22 +225,22 @@
       </div>
       <div>
         <button class="family-select" type="button">Family Site</button>
-        <h4>메뉴</h4>
+        <p class="footer-heading">메뉴</p>
         <ul><li><a href="index.html">홈</a></li><li><a href="about.html">사례집이란?</a></li><li><a href="prepare.html">사례집 준비하기</a></li><li><a href="blog.html">블로그</a></li><li><a href="portfolio.html">포트폴리오</a></li><li><a href="faq.html">FAQ</a></li></ul>
       </div>
       <div>
-        <h4>문의</h4>
+        <p class="footer-heading">문의</p>
         <ul><li><a href="contact.html">사례집 문의하기</a></li><li>TEL. 02-6207-0595 | FAX. 02-3446-3964</li><li>M. 010-6654-6207 | E. ahjannong@gmail.com</li></ul>
       </div>
     </div>
-    <p class="copy">&copy; <span id="year">2026</span> 로코즈디자인. All rights reserved.</p>
+    <div class="copy"><ul class="footer-legal"><li><a href="privacy-policy.html">개인정보처리방침</a></li><li><a href="terms.html">이용약관</a></li><li><a href="email-policy.html">이메일무단수집거부</a></li></ul><span>&copy; <span id="year">2026</span> 로코즈디자인. All rights reserved.</span></div>
   </div>
 </footer>
-<div class="quick-menu" aria-label="빠른 메뉴">
+<nav class="quick-menu" aria-label="빠른 메뉴">
   <a href="https://open.kakao.com/" target="_blank" rel="noopener" class="quick-link quick-kakao" aria-label="카카오톡 상담">K</a>
   <a href="https://www.naver.com/" target="_blank" rel="noopener" class="quick-link quick-naver" aria-label="네이버 바로가기">N</a>
   <button type="button" class="quick-link quick-top" aria-label="맨 위로 이동">↑</button>
-</div>
-<script src="js/main.js?v=20261006-cardfix26"></script>
+</nav>
+<script src="js/main.js?v=20261012-a11y01"></script>
 </body>
 </html>

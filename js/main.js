@@ -128,8 +128,8 @@
   if (filter) {
     var grid = document.querySelector('[data-per-page]');
     var perPage = grid ? parseInt(grid.getAttribute('data-per-page'), 10) : 0;
-    var items = Array.prototype.slice.call(document.querySelectorAll('[data-cat]'));
-    var tailCard = document.querySelector('.bl-cta-card');          /* shown on the last page only */
+    var cards = Array.prototype.slice.call(document.querySelectorAll('[data-cat]'));
+    var tailCard = document.querySelector('.bl-cta-card, .pf-cta-card');   /* last card of every page */
     var emptyMsg = document.querySelector('.empty');
     var pager = document.querySelector('[data-pagination]');
     var ICON_L = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>';
@@ -146,7 +146,7 @@
     }
 
     function matched() {
-      return items.filter(function (t) {
+      return cards.filter(function (t) {
         var okCat = state.cat === '전체' || t.dataset.cat === state.cat;
         var okQ = !state.q || t.textContent.indexOf(state.q) > -1;
         return okCat && okQ;
@@ -168,7 +168,7 @@
         if (n - prev > 1) out += '<span class="pg-gap" aria-hidden="true">…</span>';
         out += n === cur
           ? '<span class="pg-num is-current" aria-current="page">' + n + '</span>'
-          : '<a class="pg-num" href="' + pageUrl(n) + '" data-page="' + n + '" aria-label="' + n + '페이지">' + n + '</a>';
+          : '<a class="pg-num" href="' + pageUrl(n) + '" data-page="' + n + '">' + n + '</a>';
         prev = n;
       });
       out += cur < pages
@@ -178,13 +178,31 @@
       pager.hidden = false;
     }
 
+    /* the contact card closes every page: it takes the free cells of the last row (or a whole row when the row is full) */
+    function fillTail() {
+      if (!tailCard || !grid) return;
+      /* reset first: a leftover "span 3" would otherwise create extra implicit columns on a narrower screen */
+      tailCard.style.gridColumn = '';
+      tailCard.classList.remove('is-wide');
+      var cols = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
+      var cells = 0;
+      cards.forEach(function (t) {
+        if (t.classList.contains('hidden')) return;
+        cells += t.classList.contains('is-feature') ? cols : 1;
+      });
+      var rem = cells % cols;
+      var span = rem === 0 ? cols : cols - rem;
+      tailCard.style.gridColumn = 'span ' + span;
+      tailCard.classList.toggle('is-wide', span > 1);
+    }
+
     function render() {
       var list = matched();
       var pages = perPage ? Math.max(1, Math.ceil(list.length / perPage)) : 1;
       state.page = Math.min(Math.max(1, state.page), pages);
       var visible = perPage ? list.slice((state.page - 1) * perPage, state.page * perPage) : list;
-      items.forEach(function (t) { t.classList.toggle('hidden', visible.indexOf(t) === -1); });
-      if (tailCard) tailCard.classList.toggle('hidden', state.page !== pages);
+      cards.forEach(function (t) { t.classList.toggle('hidden', visible.indexOf(t) === -1); });
+      fillTail();
       if (emptyMsg) emptyMsg.classList.toggle('hidden', list.length > 0);
       buildPager(pages);
     }
@@ -223,6 +241,7 @@
       render();
     });
 
+    window.addEventListener('resize', fillTail);
     render();
   }
 
@@ -401,8 +420,8 @@
   /* scroll story (sticky stage: 스크롤에 따라 단계 전환) */
   var story = document.querySelector('.story');
   if (story) {
-    var items = story.querySelectorAll('.story-item');
-    var cards = story.querySelectorAll('.story-card');
+    var storyItems = story.querySelectorAll('.story-item');
+    var storyCards = story.querySelectorAll('.story-card');
     var navLis = story.querySelectorAll('.story-nav li');
     var navBtns = story.querySelectorAll('.story-nav button');
     var now = story.querySelector('.story-now');
@@ -418,7 +437,7 @@
       'linear-gradient(90deg, rgba(8, 10, 9, .72), rgba(8, 10, 9, .28) 52%, rgba(8, 10, 9, .44)), url("https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1900&q=82")',
       'linear-gradient(90deg, rgba(8, 10, 9, .72), rgba(8, 10, 9, .28) 52%, rgba(8, 10, 9, .44)), url("https://images.unsplash.com/photo-1516387938699-a93567ec168e?auto=format&fit=crop&w=1900&q=82")'
     ];
-    var total = items.length, cur = -1, ticking = false;
+    var total = storyItems.length, cur = -1, ticking = false;
 
     function setStep(i) {
       if (i === cur) return;
@@ -440,8 +459,8 @@
         }, 720);
         bgIndex = nextIndex;
       }
-      items.forEach(function (el, k) { el.classList.toggle('active', k === i); el.setAttribute('aria-hidden', k !== i); });
-      cards.forEach(function (el, k) { el.classList.toggle('active', k === i); });
+      storyItems.forEach(function (el, k) { el.classList.toggle('active', k === i); el.setAttribute('aria-hidden', k !== i); });
+      storyCards.forEach(function (el, k) { el.classList.toggle('active', k === i); });
       navLis.forEach(function (el, k) { el.classList.toggle('active', k === i); el.classList.toggle('done', k < i); });
       navBtns.forEach(function (el, k) { if (k === i) el.setAttribute('aria-current', 'step'); else el.removeAttribute('aria-current'); });
       now.textContent = ('0' + (i + 1)).slice(-2);
@@ -489,7 +508,9 @@
         document.querySelectorAll('[data-fq-group]').forEach(function (group) {
           var any = 0;
           group.querySelectorAll('.fq-item').forEach(function (item) {
-            var hit = !q || item.textContent.toLowerCase().indexOf(q) > -1;
+            var qEl = item.querySelector('.fq-text'), aEl = item.querySelector('.fq-a p');
+            var hay = ((qEl ? qEl.textContent : '') + ' ' + (aEl ? aEl.textContent : '')).toLowerCase();
+            var hit = !q || hay.indexOf(q) > -1;
             item.classList.toggle('hidden', !hit);
             if (hit) { any++; if (q) { item.classList.add('open'); } }
           });
@@ -504,13 +525,13 @@
     var navLinks = document.querySelectorAll('.fq-nav a');
     var groups = document.querySelectorAll('[data-fq-group]');
     if (navLinks.length && 'IntersectionObserver' in window) {
-      var spy = new IntersectionObserver(function (entries) {
+      var faqSpy = new IntersectionObserver(function (entries) {
         entries.forEach(function (en) {
           if (!en.isIntersecting) return;
           navLinks.forEach(function (a) { a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id); });
         });
       }, { rootMargin: '-30% 0px -60% 0px' });
-      groups.forEach(function (g) { spy.observe(g); });
+      groups.forEach(function (g) { faqSpy.observe(g); });
     }
   }
 
@@ -700,22 +721,22 @@
     }
 
     /* "다른 블로그 보기" side panel */
-    var layer = document.querySelector('[data-list-layer]');
-    if (layer) {
+    var listLayer = document.querySelector('[data-list-layer]');
+    if (listLayer) {
       var openLayer = function () {
-        layer.classList.add('is-open');
-        layer.setAttribute('aria-hidden', 'false');
+        listLayer.classList.add('is-open');
+        listLayer.removeAttribute('inert');
         document.body.classList.add('has-layer-open');
-        var x = layer.querySelector('.article-list-panel__close');
+        var x = listLayer.querySelector('.article-list-panel__close');
         if (x) x.focus();
       };
       var closeLayer = function () {
-        layer.classList.remove('is-open');
-        layer.setAttribute('aria-hidden', 'true');
+        listLayer.classList.remove('is-open');
+        listLayer.setAttribute('inert', '');
         document.body.classList.remove('has-layer-open');
       };
       article.querySelectorAll('[data-list-open]').forEach(function (b) { b.addEventListener('click', openLayer); });
-      layer.querySelectorAll('[data-list-close]').forEach(function (b) { b.addEventListener('click', closeLayer); });
+      listLayer.querySelectorAll('[data-list-close]').forEach(function (b) { b.addEventListener('click', closeLayer); });
       document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeLayer(); closePop(); } });
     } else {
       document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closePop(); });
