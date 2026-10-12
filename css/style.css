@@ -513,7 +513,6 @@ button { font: inherit; cursor: pointer; border: 0; background: none; color: inh
 
 .footer-card p, .footer-card li { font-size: 14px; color: var(--ink-2); line-height: 1.9; }
 
-.footer-card .footer-heading { font-size: 14px; font-weight: 700; margin: 0 0 12px; }
 
 .copy { text-align: center; margin-top: 28px; }
 
@@ -1843,8 +1842,9 @@ body,
 .site-footer {
   margin: 16px 16px 0;
   padding: 58px 40px 26px;
-  border-radius: 20px 20px 0 0;
-  background: #f5f4f1;
+  border-radius: 24px 24px 0 0;
+  background: #161713;
+  color: #fff;
 }
 
 .site-footer .wrap {
@@ -1872,7 +1872,7 @@ body,
   place-items: center;
   margin-bottom: 20px;
   border-radius: 50%;
-  background: #000;
+  background: #fff;
   color: transparent;
   font-size: 0;
   overflow: hidden;
@@ -1880,7 +1880,7 @@ body,
 
 .footer-card > div:first-child .logo::before {
   content: "dw";
-  color: #fff;
+  color: #161713;
   font-size: 18px;
   font-weight: 900;
   letter-spacing: 0;
@@ -1893,7 +1893,7 @@ body,
 
 .footer-card p {
   margin: 0;
-  color: #5e5b55;
+  color: rgba(255, 255, 255, .66);
   font-size: 14px;
   line-height: 1.9;
 }
@@ -1922,10 +1922,10 @@ body,
   justify-content: flex-start;
   height: 48px;
   padding: 0 46px 0 18px;
-  border: 1px solid rgba(17, 17, 17, .12);
+  border: 1px solid rgba(255, 255, 255, .18);
   border-radius: 8px;
-  background: #f8f7f3;
-  color: #25231f;
+  background: transparent;
+  color: #fff;
   font-size: 14px;
   font-weight: 700;
   font-family: inherit;
@@ -1941,7 +1941,7 @@ body,
   height: 8px;
   border-right: 2px solid currentColor;
   border-bottom: 2px solid currentColor;
-  color: #25231f;
+  color: #fff;
   transform: translateY(-64%) rotate(45deg);
   pointer-events: none;
 }
@@ -1961,8 +1961,8 @@ body,
   min-height: 48px;
   margin: 0;
   padding-top: 24px;
-  border-top: 1px solid rgba(17, 17, 17, .1);
-  color: #6b6862;
+  border-top: 1px solid rgba(255, 255, 255, .14);
+  color: rgba(255, 255, 255, .62);
   font-size: 13px;
 }
 
@@ -1976,8 +1976,10 @@ body,
   list-style: none;
 }
 
-.footer-legal a { color: #2a2824; font-weight: 800; display: inline-flex; align-items: center; min-height: 44px; }
+.footer-legal a { color: #fff; font-weight: 800; display: inline-flex; align-items: center; min-height: 44px; }
 .footer-legal a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.footer-legal a:hover { color: #fff; }
+.site-footer { padding-right: 96px; }
 
 /* ---------- Home lower sections ---------- */
 
@@ -2597,6 +2599,7 @@ body.search-opened { overflow: hidden; }
 .quick-top {
   background: #111;
   color: #fff;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .28);
 }
 
 @media (max-width: 820px) {
