@@ -5772,7 +5772,7 @@ body.has-layer-open { overflow: hidden; }
 .article-section { margin-bottom: 72px; scroll-margin-top: 110px; }
 .article-section > h2 { margin: 0 0 18px; font-size: 20px; line-height: 1.4; font-weight: 600; letter-spacing: -.035em !important; }
 .article-lead p { margin: 0 0 1.2em; font-size: 15px; line-height: 1.7; letter-spacing: -.02em !important; color: #333; }
-.portfolio-goals { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.portfolio-goals { display: flex; flex-direction: column; gap: 16px; }
 .portfolio-goal { padding: 28px; border-radius: 20px; background: #fff; }
 .portfolio-goal .goal-no { color: #fff; font-size: 11px; font-weight: 500; display: inline-grid; min-width: 28px; height: 22px; padding: 0 9px; place-items: center; border-radius: 999px; background: #111; }
 .portfolio-goal h3 { margin: 24px 0 16px; padding-bottom: 14px; border-bottom: 1px solid rgba(17, 17, 17, .12); font-size: 18px; font-weight: 600; line-height: 1.4; letter-spacing: -.03em !important; color: #191919; }
@@ -5816,7 +5816,6 @@ body.has-layer-open { overflow: hidden; }
   .article-continuation__card { grid-template-columns: 84px minmax(0, 1fr) 18px; gap: 12px; }
   .article-continuation__card img { width: 84px; }
   .article-post-navigation { grid-template-columns: 1fr; }
-  .portfolio-goals { grid-template-columns: 1fr; }
   .portfolio-goal { padding: 22px; }
   .portfolio-site-cta { flex-direction: column; align-items: flex-start; padding: 24px; }
 }
