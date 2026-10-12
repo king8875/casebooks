@@ -127,7 +127,10 @@
   var filter = document.querySelector('.filter');
   if (filter) {
     var grid = document.querySelector('[data-per-page]');
-    var perPage = grid ? parseInt(grid.getAttribute('data-per-page'), 10) : 0;
+    var perPageBase = grid ? parseInt(grid.getAttribute('data-per-page'), 10) : 0;
+    var perPageMobile = grid ? parseInt(grid.getAttribute('data-per-page-m'), 10) : 0;   /* even number: the two-column grid has no empty last cell */
+    var perPageMq = window.matchMedia('(max-width: 820px)');
+    var perPage = perPageMq.matches && perPageMobile ? perPageMobile : perPageBase;
     var cards = Array.prototype.slice.call(document.querySelectorAll('[data-cat]'));
     var tailCard = document.querySelector('.bl-cta-card, .pf-cta-card');   /* last card of every page */
     var emptyMsg = document.querySelector('.empty');
@@ -194,7 +197,7 @@
       var cells = 0;
       cards.forEach(function (t) {
         if (t.classList.contains('hidden')) return;
-        cells += t.classList.contains('is-feature') ? cols : 1;
+        cells += t.classList.contains('is-feature') && !window.matchMedia('(max-width: 820px)').matches ? cols : 1;
       });
       var rem = cells % cols;
       var span = rem === 0 ? cols : cols - rem;
@@ -220,9 +223,28 @@
       buildPager(pages);
     }
 
+    /* mobile: the category chips become a dropdown list (accordion) behind a "카테고리" toggle, with a count per category */
+    var filterToggle = document.querySelector('.filter-toggle');
+    var filterWrap = filter.parentElement;
+    filter.querySelectorAll('button').forEach(function (b) {
+      var name = b.dataset.filter;
+      var n = cards.filter(function (c) { return name === '전체' || c.dataset.cat === name; }).length;
+      b.insertAdjacentHTML('beforeend', '<span class="filter-count">' + n + '</span>');
+    });
+    var setFilterOpen = function (open) {
+      filterWrap.classList.toggle('is-filter-open', open);
+      if (filterToggle) filterToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    if (filterToggle) {
+      filterToggle.addEventListener('click', function () { setFilterOpen(!filterWrap.classList.contains('is-filter-open')); });
+      document.addEventListener('click', function (e) { if (!filterWrap.contains(e.target) || e.target === filterWrap) setFilterOpen(false); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setFilterOpen(false); });
+    }
+
     filter.addEventListener('click', function (e) {
       var b = e.target.closest('button');
       if (!b) return;
+      setFilterOpen(false);
       filter.querySelectorAll('button').forEach(function (x) { x.classList.remove('active'); });
       b.classList.add('active');
       state.cat = b.dataset.filter;
@@ -272,6 +294,12 @@
       render();
     });
 
+    perPageMq.addEventListener('change', function () {
+      perPage = perPageMq.matches && perPageMobile ? perPageMobile : perPageBase;
+      state.page = 1;
+      history.replaceState(null, '', pageUrl(1));
+      render();
+    });
     window.addEventListener('resize', fillTail);
     render();
   }
@@ -382,6 +410,21 @@
         });
       }, 3000);
     }
+  }
+
+  /* about page, mobile: the type chips collapse to a fixed height and open smoothly with a "more" button */
+  var typeCloud = document.querySelector('[data-type-cloud]');
+  var typeMore = document.querySelector('[data-type-more]');
+  if (typeCloud && typeMore) {
+    var typeMq = window.matchMedia('(max-width: 820px)');
+    var setTypes = function (open) {
+      typeCloud.classList.toggle('is-open', open);
+      typeMore.setAttribute('aria-expanded', open ? 'true' : 'false');
+      typeMore.querySelector('[data-type-more-label]').textContent = open ? '접기' : '더보기';
+      typeCloud.style.maxHeight = open && typeMq.matches ? typeCloud.scrollHeight + 'px' : '';
+    };
+    typeMore.addEventListener('click', function () { setTypes(!typeCloud.classList.contains('is-open')); });
+    typeMq.addEventListener('change', function () { setTypes(false); });
   }
 
   var aboutFlow = document.querySelector('[data-about-flow]');
