@@ -6277,3 +6277,26 @@ a.pg-num:hover, a.pg-btn:hover { color: #111; }
   body.menu-open::before { opacity: 1; pointer-events: auto; }
   body.menu-open { overflow: hidden; }
 }
+
+/* Search panel — weights and sizes after the veryeasy.kr search modal (titles semibold, not heavy) */
+.search-layer input { font-weight: 400 !important; }
+.search-tabs button { font-weight: 500 !important; color: #5b5b60 !important; }
+.search-tabs button.active { font-weight: 600 !important; color: #111 !important; }
+.search-block .search-block-title { font-weight: 600 !important; }
+.search-portfolio a, .search-blog b, .search-faq b { font-weight: 600 !important; color: #232326 !important; }
+.search-blog em { color: #6e6a64 !important; font-weight: 400 !important; }
+.search-faq span { color: #6e6a64 !important; font-weight: 500 !important; }
+.search-faq i { font-weight: 400 !important; }
+
+@media (min-width: 821px) {
+  .search-layer input { font-size: 15.5px !important; line-height: 1.65 !important; }
+  .search-tabs button { font-size: 13px !important; }
+  .search-tabs button span { font-size: 12px !important; }
+  .search-block .search-block-title { font-size: 12px !important; line-height: 1.2 !important; letter-spacing: .02em !important; }
+  .search-portfolio a { font-size: 13px !important; line-height: 1.35 !important; }
+  .search-blog b { font-size: 13.5px !important; line-height: 1.4 !important; }
+  .search-faq b { font-size: 13.5px !important; line-height: 1.45 !important; }
+  .search-blog em { font-size: 12px !important; }
+  .search-faq span { font-size: 11px !important; }
+  .search-faq i { font-size: 19px !important; }
+}
