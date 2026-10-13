@@ -12,6 +12,19 @@
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
+  /* footer: company info opens as an accordion on mobile, the family-site menu closes on an outside click */
+  var companyToggle = document.querySelector('.footer-company-toggle');
+  if (companyToggle) {
+    companyToggle.addEventListener('click', function () {
+      companyToggle.setAttribute('aria-expanded', companyToggle.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+    });
+  }
+  var familyMenu = document.querySelector('.footer-family-menu');
+  if (familyMenu) {
+    document.addEventListener('click', function (e) { if (!familyMenu.contains(e.target)) familyMenu.removeAttribute('open'); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') familyMenu.removeAttribute('open'); });
+  }
+
   /* mobile menu */
   var toggle = document.querySelector('.menu-toggle');
   var gnb = document.querySelector('.gnb');
@@ -433,23 +446,6 @@
     typeMq.addEventListener('change', function () { setTypes(false); });
   }
 
-  var aboutFlow = document.querySelector('[data-about-flow]');
-  if (aboutFlow) {
-    var flowCards = aboutFlow.querySelectorAll('.flow-card');
-    function updateAboutFlow() {
-      var rect = aboutFlow.getBoundingClientRect();
-      var max = Math.max(1, rect.height - window.innerHeight);
-      var progress = Math.min(1, Math.max(0, -rect.top / max));
-      var active = Math.min(flowCards.length - 1, Math.floor(progress * flowCards.length));
-      flowCards.forEach(function (card, i) {
-        card.classList.toggle('active', i === active);
-        card.style.setProperty('--offset', i - active);
-      });
-    }
-    updateAboutFlow();
-    window.addEventListener('scroll', updateAboutFlow, { passive: true });
-    window.addEventListener('resize', updateAboutFlow);
-  }
 
   /* faq accordion */
   document.querySelectorAll('.faq-q').forEach(function (btn) {
@@ -616,44 +612,12 @@
   }
 
 
-  /* prepare page: clients explorer (tabs + institution search) */
+  /* prepare page: clients explorer (tabs) */
   document.querySelectorAll('[data-cl-explorer]').forEach(function (box) {
     var tabs = Array.prototype.slice.call(box.querySelectorAll('.cl-tab'));
     var panels = Array.prototype.slice.call(box.querySelectorAll('.cl-panel'));
-    var stage = box.querySelector('.cl-stage');
-    var input = box.querySelector('[data-cl-search]');
-    var clear = box.querySelector('.cl-search-clear');
-    var results = box.querySelector('.cl-results');
-    var list = results.querySelector('.cl-names');
-    var hit = results.querySelector('[data-cl-hit]');
-
-    var items = [];
-    panels.forEach(function (p, i) {
-      var cat = tabs[i].querySelector('.cl-name').textContent;
-      p.querySelectorAll('.cl-names li').forEach(function (li) { items.push({ name: li.textContent, cat: cat }); });
-    });
-
-    function esc(s) { return s.replace(/[&<>"]/g, function (m) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m]; }); }
-
-    function search() {
-      var q = input.value.trim();
-      clear.hidden = !input.value;
-      if (!q) { stage.classList.remove('is-searching'); return; }
-      var key = q.replace(/\s+/g, '').toLowerCase();
-      var found = items.filter(function (it) { return it.name.replace(/\s+/g, '').toLowerCase().indexOf(key) > -1; });
-      var re = new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\s+/g, '\\s*') + ')', 'ig');
-      list.innerHTML = found.map(function (it) {
-        return '<li><span>' + esc(it.name).replace(re, '<mark>$1</mark>') + '</span><em>' + esc(it.cat) + '</em></li>';
-      }).join('');
-      hit.textContent = found.length;
-      results.classList.toggle('is-empty', found.length === 0);
-      stage.classList.add('is-searching');
-    }
-
-    function reset() { input.value = ''; search(); }
 
     function select(i, focus) {
-      if (input.value) reset();
       tabs.forEach(function (t, k) {
         var on = k === i;
         t.classList.toggle('active', on);
@@ -663,10 +627,6 @@
       panels.forEach(function (p, k) { p.classList.toggle('active', k === i); });
       if (focus) tabs[i].focus();
     }
-
-    input.addEventListener('input', search);
-    input.addEventListener('keydown', function (e) { if (e.key === 'Escape') reset(); });
-    clear.addEventListener('click', function () { reset(); input.focus(); });
 
     tabs.forEach(function (t, i) {
       t.addEventListener('click', function () { select(i); });
